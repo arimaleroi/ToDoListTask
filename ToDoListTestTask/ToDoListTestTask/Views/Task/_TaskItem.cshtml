@@ -1,0 +1,8 @@
+﻿@model TaskModel
+
+<li id="task-@Model.Id">
+    <input id="checkbox-@Model.Id" type="checkbox" @(Model.IsCompleted ? "checked" : "") onchange="toggleComplete(@Model.Id)">
+    <span id="task-title-@Model.Id">@Model.Title</span>
+    <button type="button" onclick="editTask(@Model.Id)">Edit</button>
+    <button type="button" onclick="deleteTask(@Model.Id)">Delete</button>
+</li>

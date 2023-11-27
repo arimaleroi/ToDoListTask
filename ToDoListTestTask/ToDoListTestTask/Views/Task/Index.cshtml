@@ -1,0 +1,35 @@
+﻿@model List<TaskModel>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<h2>TASK LIST</h2>
+<p>
+    <a asp-action="FilterByStatus" asp-route-isCompleted="true">Finished</a> |
+    <a asp-action="FilterByStatus" asp-route-isCompleted="false">Unfinished</a> |
+    <a asp-action="Index" asp-route-isCompleted="null">All</a>
+</p>
+
+
+<ul id="task-list">
+    @foreach (var task in Model)
+    {
+        <li id="task-@task.Id">
+            <input id="checkbox-@task.Id" type="checkbox" @(task.IsCompleted ? "checked" : "") onchange="toggleComplete(@task.Id)">
+            <span id="task-title-@task.Id">@task.Title</span>
+            <button type="button" onclick="editTask(@task.Id)">Edit</button>
+            <button type="button" onclick="deleteTask(@task.Id)">Delete</button>
+        </li>
+    }
+</ul>
+
+<div id="create-form">
+    <h4>New task</h4>
+    <form id="createTaskForm">
+        <input type="text" id="newTaskTitle" required />
+        <button type="button" onclick="createTask()">Add</button>
+    </form>
+</div>
+
+@section scripts {
+    <script src="~/js/tasks.js"></script>
+}
